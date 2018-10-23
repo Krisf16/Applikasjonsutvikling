@@ -1,28 +1,26 @@
 
-var http = require('http');
 
-var fs = require('fs');
-//404 response
-function send404Response(response){
-    response.writeHead(404,{"Content-Type": "text/plain"});
-    response.write("Error 404: Page not found");
-    response.end();
-}
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
 
-//handle a user request
-function onRequest(request, response){
- 
-    if (request.method == 'GET' && request.url ==  '/'){
-        response.writeHead(200, {"Content-Type": "text/html"});
-        fs.createReadStream("./index.html").pipe(response);
-        
-        
- }  else{
-        send404Response(response); 
- }
-}
 
 
-http.createServer(onRequest).listen(8080);
-console.log("Server is now running");
+app.set('port', (process.env.PORT || 8080));
+app.use(express.static('public'));
+app.use(bodyParser.json());
+
+app.listen(app.get('port'), function () {
+     console.log('server running', app.get('port'));
+});
+
+
+
+app.post("/app/user", function(req,res,){
+
+    res.send("WOHO").end();
+
+
+
+})
