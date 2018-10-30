@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <form id="createUserForm">
+        <label for="userName">User name:</label>
+        <input type="text" id="userName">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+
+        <label for="rememberMe">Remember Me:</label>
+        <input type="checkbox" id="rememberMe">
+
+       
+        <button type="button" id="createUser">Create User</button>
+    </form>
+    <br>
+    <br>
+    
+
+</body>
+<script>
+let createUser = document.getElementById("createUser");
+createUser.onclick = function(){
+
+
+    
+console.log("yeah")
+        let form = document.getElementById("createUserForm");
+        form.onclick = function (evt) {
+            // Stops the form from submitting
+            evt.preventDefault();
+            // Username, email and password is validated by browser :)
+            // if values are missing it is our mistake in not finding the correct element.
+            // https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+            let userName = document.getElementById("userName").value;
+            let password = document.getElementById("password").value;
+           
+
+            fetch('/app/users',{
+                method:"POST",
+                body:JSON.stringify({
+                    name:userName,
+                    pswHash:password
+                   
+                }),
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+
+            }).then(function(data){
+                if(data.status < 400){
+                    return data.json();
+                }
+            }).then(function(createdUser){
+                if(createdUser.id){
+                    // We have a newly created user !!
+                    clearScreen();
+                    displayLoginForm();
+                }
+            }).catch(err =>{
+                console.error(err);
+            });
+
+        }
+
+
+
+
+
+    }
+
+
+</script>
+</html>
