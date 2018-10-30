@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const db = require("./js/db.js");
-const users = require("./js/users.js");
+const users = require("./js/user.js");
 
 
 
@@ -27,5 +27,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.use('/app/users/',users);
+app.use('/app/user/',users);
 
