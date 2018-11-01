@@ -20,7 +20,7 @@
 
 </body>
 <script>
-let createUser = document.getElementById("createUserForm");
+
 
 
 
@@ -35,13 +35,16 @@ let createUser = document.getElementById("createUserForm");
             // https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
             let userName = document.getElementById("userName").value;
             let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
            
             console.log("yeah")
             fetch('/app/user',{
                 method:"POST",
                 body:JSON.stringify({
                     name:userName,
-                    pswHash:password
+                    pswHash:password,
+                    email:email
+
                    
                 }),
                 headers: {
