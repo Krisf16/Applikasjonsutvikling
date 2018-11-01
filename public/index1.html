@@ -4,16 +4,15 @@
 
     <form id="createUserForm">
         <label for="userName">User name:</label>
-        <input type="text" id="userName">
+        <input type="text" id="userName" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required>
 
         <label for="password">Password:</label>
-        <input type="password" id="password">
+        <input type="password" id="password" required>
 
-        <label for="rememberMe">Remember Me:</label>
-        <input type="checkbox" id="rememberMe">
-
-       
-        <button type="button" id="createUser">Create User</button>
+        <button>Create</button>
     </form>
     <br>
     <br>
@@ -21,14 +20,14 @@
 
 </body>
 <script>
-let createUser = document.getElementById("createUser");
-createUser.onclick = function(){
+let createUser = document.getElementById("createUserForm");
+
 
 
     
-console.log("yeah")
+
         let form = document.getElementById("createUserForm");
-        form.onclick = function (evt) {
+        form.onsubmit = function (evt) {
             // Stops the form from submitting
             evt.preventDefault();
             // Username, email and password is validated by browser :)
@@ -37,8 +36,8 @@ console.log("yeah")
             let userName = document.getElementById("userName").value;
             let password = document.getElementById("password").value;
            
-
-            fetch('/app/user',{
+            console.log("yeah")
+            fetch('/app/users',{
                 method:"POST",
                 body:JSON.stringify({
                     name:userName,
@@ -53,12 +52,7 @@ console.log("yeah")
                 if(data.status < 400){
                     return data.json();
                 }
-            }).then(function(createdUser){
-                if(createdUser.id){
-                    // We have a newly created user !!
-                    clearScreen();
-                    displayLoginForm();
-                }
+           
             }).catch(err =>{
                 console.error(err);
             });
@@ -69,7 +63,7 @@ console.log("yeah")
 
 
 
-    }
+    
 
 
 </script>
