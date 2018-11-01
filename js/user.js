@@ -3,9 +3,13 @@ var router = express.Router();
 var db = require("./db.js");
 
 router.get('/app/users',function(req,res,next){
-    let query = "Select * from users";
+    let query = "Select * from user";
     let users = db.select(query);
-    console.log(users);
+    if(users){
+        res.status(200).json(JSON.parse(users));
+    }else{
+        console.log("feil")
+    }
 });
 
 router.post('/app/user',async function(req,res,next){

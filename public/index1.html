@@ -1,70 +1,190 @@
+
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name ="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="to-do5.css">
+    <script src=""></script>
+ 
+  
+</head>
 <body>
+    <div id="content" style="">
+        <!--Grid View Page-->
+        <div class="panel" title="Title">
+          <input id="task"><button id="add">Add</button>
+          <div id="todos"></div>
 
-    <form id="createUserForm">
-        <label for="userName">User name:</label>
-        <input type="text" id="userName" required>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" required>
-
-        <button>Create</button>
-    </form>
-    <br>
-    <br>
-    
-
-</body>
-<script>
-let createUser = document.getElementById("createUserForm");
+          <div class="dropdown">
+                <span>Mouse over me</span>
+                <div class="dropdown-content">
+                  <p>Hello World!</p>
+                </div>
+              </div>
+      </div>
 
 
+      <script>
+      var todos = []
+        function get_todos() {
+         
+          var todos_str = localStorage.getItem('todo');
+          
+          if (todos_str !== null) {
+            todos = JSON.parse(todos_str);
+          }
+           return todos;
 
-    
-
-        let form = document.getElementById("createUserForm");
-        form.onsubmit = function (evt) {
-            // Stops the form from submitting
-            evt.preventDefault();
-            // Username, email and password is validated by browser :)
-            // if values are missing it is our mistake in not finding the correct element.
-            // https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
-            let userName = document.getElementById("userName").value;
-            let password = document.getElementById("password").value;
-           
-            console.log("yeah")
-            fetch('/app/users',{
-                method:"POST",
-                body:JSON.stringify({
-                    name:userName,
-                    pswHash:password
-                   
-                }),
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-
-            }).then(function(data){
-                if(data.status < 400){
-                    return data.json();
-                }
-           
-            }).catch(err =>{
-                console.error(err);
-            });
-
+ 
         }
 
+function add() {
+  var task = document.getElementById('task').value;
+  var todos = get_todos();
+  todos.push(task);
+  localStorage.setItem('todo', JSON.stringify(todos));
+  console.log(todos);
+  show();
+  return false;
+ 
+}
 
+function remove() {
+  var id = this.getAttribute('id');
+  var todos = get_todos();
+  todos.splice(id, 1);
+  localStorage.setItem('todo', JSON.stringify(todos));
+  show();
+  return false;
+}
 
+function check() {
+  var id = this.getAttribute('id');
+  var todos = get_todos();
+  let found = null;
+  let i = 0;
+  while(found === null){
+    if(todos[i].id === id){
+      found = todos[i];
+    }
+    else{
+      i++;
+    }
+  } 
+  ///todos.style.textDecoration(id,1) = "underline overline";
+  found.style.textDecoration = "underline";
+  localStorage.setItem('todo', JSON.stringify(todos));
+  show();
+  
+}
 
+function edit() {
+  var id = this.getAttribute('id');
+  var todos = get_todos();
+  
+  document.getElementById(id,1).style.textDecoration = "underline";
+  document.getElementById("list").style.textDecoration="underline";
+  localStorage.setItem('todo', JSON.stringify(todos));
+  show();
+  
+}
 
+/*function popUp(){
+
+  var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+}*/
+
+function show() {
+
+  var todos = get_todos();
+  var html = '<ul class="list">';
     
+    for (var i = 0; i < todos.length; i++) {
+            html += '<li  id="'+ i+ '">' + todos[i] + '<button class="remove" id="' + i + '">Delete</button> <button type="button" class="popUp">Info</button>';
+              //<button type="button" class="btn btn-info">Info</button>
+    };
+            
+            html += '</ul>';
+            document.getElementById('todos').innerHTML = html;
+  
+  
+    var button_delete = document.getElementsByClassName('remove');
+    for (var i = 0; i < button_delete.length; i++) {
+    button_delete[i].addEventListener('click', remove);
+   
+  };
+  /*
+  var button_popUp = document.getElementsByClassName('popUp');
+    for (var i = 0; i < button_popUp.length; i++) {
+    button_popUp[i].addEventListener('click', popUp);
+    button_popUp.onclick = function() {
+    modal.style.display = "block";
+}
+   
+  };*/
+  
+  /*
+ var button_edit = document.getElementsByClassName('edit');
+  for (var i = 0; i < button_edit.length; i++) {
+    button_edit[i].addEventListener('click', edit);
+  };
+
+  var button_check = document.getElementsByClassName('check');
+  for (var i = 0; i < button_check.length; i++) {
+    button_check[i].addEventListener('click', check);
+    console.log("funker")
+  };*/
+
+}
+document.getElementById('add').addEventListener('click', add);
+show();
+
+console.log(todos);
+let list = document.getElementById("todos");
+
+list.onclick = function(){
+
+    var id = this.getAttribute('id');
+    var element= todos.slice(0);
+    console.log(event.target)
+
+}
+function menuPopup (){
+  
+ let eventTarget = event.target
+if (eventTarget === true ){
+  console.log("yeah")
+}
+let listeId = asdasasd;
 
 
-</script>
+
+
+
+
+}
+
+
+
+
+
+
+
+      </script>
+      
+</body>
 </html>
+
+
