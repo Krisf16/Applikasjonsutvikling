@@ -3,6 +3,9 @@ const { Pool, Client } = require('pg');
 const connectionString = process.env.DATABASE_URL;
 
 
+const db = {}
+
+
 async function runQuery() {
     let respons = null;
     const client = new Client({
@@ -25,7 +28,7 @@ async function runQuery() {
 }
 
 
-const db = {}
+
 
 db.select =async function (query) {
     return await runQuery(query);
