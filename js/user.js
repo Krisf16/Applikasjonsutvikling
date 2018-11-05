@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router();
 var db = require("./db.js");
 
-router.get('/app/users',function(req,res,next){
+router.get('/app/user',function(req,res,next){
     let query = "Select * from user";
     let users = db.select(query);
     if(users){
@@ -17,10 +17,10 @@ router.post('/app/user',async function(req,res,next){
     let userEmail = req.body.email;
     let userName = req.body.name;
     let paswordHash = req.body.pswHash;
-    let userRole = req.body.role;
+    
 
-    let query = `INSERT INTO "public"."Users"("email", "username", "hash", "role") 
-        VALUES('${userEmail}', '${userName}', '${paswordHash}', ${userRole}) RETURNING "id", "email", "username", "hash", "role"`;
+    let query = `INSERT INTO "public"."user"("email", "username", "hash") 
+        VALUES('${userEmail}', '${userName}', '${paswordHash}') RETURNING "id", "email", "username", "hash", "role"`;
 
     let code = await db.insert(query) ? 200:500;
     res.status(code).json({}).end()

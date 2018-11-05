@@ -30,15 +30,13 @@
         form.onsubmit = function (evt) {
             // Stops the form from submitting
             evt.preventDefault();
-            // Username, email and password is validated by browser :)
-            // if values are missing it is our mistake in not finding the correct element.
-            // https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation
+            
             let userName = document.getElementById("userName").value;
             let password = document.getElementById("password").value;
             let email = document.getElementById("email").value;
            
-            console.log("yeah")
-            fetch('/app/user',{
+            
+            fetch('/app/user/',{
                 method:"POST",
                 body:JSON.stringify({
                     name:userName,
@@ -53,6 +51,8 @@
 
             }).then(function(data){
                 if(data.status < 400){
+
+                    console.log(data);
                     return data.json();
                 }
            

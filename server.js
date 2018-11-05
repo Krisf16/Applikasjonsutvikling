@@ -4,11 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const db = require("./js/db.js");
-const users = require("./js/user.js");
+const user = require("./js/user.js");
 
 
 
-
+app.use(user);
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('public'));
@@ -27,5 +27,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.use('/app/user/',users);
+
+
+//app.use('/app/db/',db);
 
