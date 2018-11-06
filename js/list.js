@@ -2,29 +2,28 @@ var express = require('express')
 var router = express.Router();
 var db = require("./db.js");
 
-router.get('/app/user',async function(req,res,next){
-    let query = `Select * from "public"."user" `;
-    let users = await db.select(query);
-    if(users){
-        res.status(200).json(users);
+router.get('/app/lists',async function(req,res,next){
+    let query = `Select * from "public"."lists" `;
+    let listArray = await db.select(query);
+    if(listArray){
+        res.status(200).json(listArray);
     }else{
         console.log("feil")
     }
 });
 
-router.post('/app/user',async function(req,res,next){
+router.post('/app/lists',async function(req,res,next){
 
 
     console.log("Request ----------------------------------------------");
     console.dir(req.body);
     console.log("Request ----------------------------------------------");
-    let userEmail = req.body.email;
-    let userName = req.body.name;
-    let paswordHash = req.body.pswHash;
+  
+    let listContent = req.body.inputText;
     
 
-    let query = `INSERT INTO "public"."user"("username", "hash","email") 
-        VALUES('${userName}', '${paswordHash}','${userEmail}') RETURNING "id", "email", "username", "hash"`;
+    let query = `INSERT INTO "public"."lists"("listcontent") 
+        VALUES('${listContent}') RETURNING "listid","userid","listcontent"`;
 
     let code = await db.insert(query) ? 200:500;
     res.status(code).json({}).end()
@@ -32,7 +31,7 @@ router.post('/app/user',async function(req,res,next){
 
 
 
-router.get('/app/user/:userName', async function(req,res,next){
+/*router.get('/app/user/:userName', async function(req,res,next){
 
     
 
@@ -50,7 +49,7 @@ router.get('/app/user/:userName', async function(req,res,next){
     } else{
         res.status(401).json({}).end();
     }
-})
+})*/
 
 
 

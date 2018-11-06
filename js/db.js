@@ -18,8 +18,8 @@ async function runQuery(query) {
         
         // Wait untill we have a connection to the database
         await client.connect()
-        let res = await client.query(query);
-        /*
+        /*let res = await client.query(query);*/
+        
         // Waite untill the prommise has completed
         let res = await client.query(query).then(function (res) {
             
@@ -29,7 +29,7 @@ async function runQuery(query) {
             console.log(err);
            
         });
-        */
+        
         respons = res.rows;
       
     } catch (e) {
