@@ -2,11 +2,11 @@ var express = require('express')
 var router = express.Router();
 var db = require("./db.js");
 
-router.get('/app/user',function(req,res,next){
-    let query = "Select * from user";
-    let users = db.select(query);
+router.get('/app/user',async function(req,res,next){
+    let query = `Select * from "public"."user" `;
+    let users = await db.select(query);
     if(users){
-        res.status(200).json(JSON.parse(users));
+        res.status(200).json(users);
     }else{
         console.log("feil")
     }
@@ -23,19 +23,23 @@ router.post('/app/user',async function(req,res,next){
     let paswordHash = req.body.pswHash;
     
 
-    let query = `INSERT INTO "public"."user"("email", "username", "hash") 
-        VALUES('${userEmail}', '${userName}', '${paswordHash}') RETURNING "id", "email", "username", "hash", "role"`;
+    let query = `INSERT INTO "public"."user"("username", "hash","email") 
+        VALUES('${userName}', '${paswordHash}','${userEmail}') RETURNING "id", "email", "username", "hash"`;
 
     let code = await db.insert(query) ? 200:500;
     res.status(code).json({}).end()
 })
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 
 router.get('/app/user/:userName',function(req,res,next){
 
     let paswordHash = req.body.pswHash;
     let userName = req.params["userName"];
 
-    let query = `Select * from users where userName='${userName}' 
+    let query = `Select * from user where userName='${userName}' 
     and hash='${paswordHash}'`;
 
     let user = db.select(query) ;
