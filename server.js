@@ -8,11 +8,11 @@ const user = require("./js/user.js");
 
 
 
-app.use(user);
-
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(user);
+
 
 
 app.listen(app.get('port'), function () {
@@ -29,5 +29,5 @@ app.use(function(err, req, res, next) {
 
 
 
-//app.use('/app/db/',db);
+
 

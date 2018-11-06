@@ -14,6 +14,10 @@ router.get('/app/user',function(req,res,next){
 
 router.post('/app/user',async function(req,res,next){
 
+
+    console.log("Request ----------------------------------------------");
+    console.dir(req.body);
+    console.log("Request ----------------------------------------------");
     let userEmail = req.body.email;
     let userName = req.body.name;
     let paswordHash = req.body.pswHash;
@@ -31,7 +35,7 @@ router.get('/app/user/:userName',function(req,res,next){
     let paswordHash = req.body.pswHash;
     let userName = req.params["userName"];
 
-    let query = `Select * from Users where userName='${userName}' 
+    let query = `Select * from users where userName='${userName}' 
     and hash='${paswordHash}'`;
 
     let user = db.select(query) ;
