@@ -238,7 +238,8 @@ input{
 }
 
 .header li {
-    float: left;
+    float: right;
+    
 }
 
 .header li a {
@@ -253,7 +254,3 @@ input{
     background-color: #111;
 }
 
-#menu{
-
-   margin-left: 1000px
-}
