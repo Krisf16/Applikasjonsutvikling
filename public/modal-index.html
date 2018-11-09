@@ -11,7 +11,11 @@
 <body>
     
 
+<div class="header" style="color:aliceblue;">
 
+        <div class="square"></div>
+
+</div>
 
 
 <div id="content">
@@ -49,9 +53,19 @@
       </div>
 </div>
 <script>
+function clearInput(){
+    
+}
+    
 /// if the submit butto is clicked, the modal closes
     modalBtn.onclick = function(){
         modal.style.display = "none";
+        
+        
+        //delay of clear inputvalue function
+        setTimeout(function() {
+            document.getElementById("task").value="";
+        },1);
     }
 var modal = document.getElementById('myModal');
 
@@ -174,7 +188,7 @@ function show() {
 
   var editModal = document.getElementsByClassName('editBttn');
   for (var i = 0; i < editModal.length; i++) {
-      
+      localStorage.clear(todos);
   editModal[i].addEventListener('click', listModal);
  }
 
