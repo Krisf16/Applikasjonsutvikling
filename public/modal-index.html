@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   
 </head>
 <body>
@@ -33,8 +34,8 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-   <input id="task" type="text" placeholder="Subject">
-   <input type="text" placeholder="Description">
+   <input id="task" type="text" placeholder="What do you want to remember">
+  
  
    <button id="modalBtn">submit</button>
   </div>
@@ -112,14 +113,22 @@ function get_todos() {
        }
 
 function add() {
-  var task = document.getElementById('task').value;
+  var inputTxt = document.getElementById('task').value;
   var todos = get_todos();
-  todos.push(task);
+  
+  if(inputTxt.length == 0){
+console.log("tomt");
+
+  }
+  else {
+    todos.push(inputTxt);
+  
+  
   //localStorage.setItem('todo', JSON.stringify(todos));
   console.log(todos);
   show();
   return false;
- 
+  }
 }
 
 function remove() {

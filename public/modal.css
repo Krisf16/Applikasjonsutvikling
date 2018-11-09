@@ -23,11 +23,15 @@ body {
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(254, 254, 254, 0.9);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    
+    width: 400px;
+    height: 140px;
+    border-radius: 7px;
+    margin: 126px auto;
 }
 
 /* The Close Button */
@@ -62,11 +66,7 @@ body {
     border-radius: 10px;
 }
 
-.modal-content{
-    width: 500px;
-    height: 300px;
-    border-radius: 7px;
-}
+
 
 #modalBtn{
     background-color: #008CBA; 
@@ -77,7 +77,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 4px 123px;
     cursor: pointer;
     border-radius: 4px;
 }
@@ -204,6 +204,7 @@ input{
 
 .list{
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 
