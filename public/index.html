@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>To-do</title>
+    <link rel="stylesheet" href="Idunno.css">
+    <script src="List.js"></script>
+    <script src="../js/CreateUser.js"></script>
+    <script src="../js/Login.js"></script>
+</head>
+
+<body>
+    
+    <span onclick="document.getElementById('Login_Modal').style.display='block'" class="Btn" id=Login_Btn>Login</span>
+    <span onclick="document.getElementById('Create_Modal').style.display='block'" class="Btn" id=Create_User_Btn>Create User</span>
+    
+    <br>
+    <br>
+    <br>
+    <div id="mainDiv" class="header">
+  <h2>To Do List</h2>
+  <input type="text" id="ListInput" placeholder="Title...">
+  <span onclick="newElementOnList()" class="Btn">Add</span>
+</div>
+    
+    <ul id="mainList"></ul>
+
+<div>
+
+  <div id="Login_Modal" class="modal">
+    <div class="modal-content">
+      
+        <span onclick="document.getElementById('Login_Modal').style.display='none'" 
+        class="ExitBtn">&times;</span>
+          <br>
+        <h2>Login</h2>
+          
+      <div>
+        <p>Username:</p><input type="text" id="Login_Username_Input" placeholder="..." class="modal-input">
+        <p>Password:</p><input type="password" id="Login_Password_Input" placeholder="..." class="modal-input">
+      </div>
+      
+        <p class="modal-foot" >Temp</p>
+        <span onclick="Login()" class="Btn">Login</span>
+      
+        
+    </div>
+  </div>
+</div>
+    
+<div>
+
+  <div id="Create_Modal" class="modal">
+    <div class="modal-content2">
+      
+        <span onclick="document.getElementById('Create_Modal').style.display='none'" 
+        class="ExitBtn">&times;</span>
+          <br>
+        <h2>Create User</h2>
+          
+      <div class="container">
+        <p>Email:</p><input type="email" id="email" placeholder="..." class="modal-input">
+        <p>Username:</p><input type="text" id="username" placeholder="..." class="modal-input">
+        <p>Password:</p><input type="password" id="password" placeholder="..." class="modal-input">
+      </div>
+      
+        <p class="modal-foot" >Temp</p>
+        <span onclick="CreateUser()" class="Btn">Login</span>
+      
+        
+    </div>
+  </div>
+</div>
+
+
+</body>
+    
+<script>
+
+    
+    
+</script>
+    
+</html>
+
+
