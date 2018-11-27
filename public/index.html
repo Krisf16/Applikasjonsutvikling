@@ -248,9 +248,15 @@ async function RefreshList(userid) {
 				}
 
 			});
+			
+			console.log("resp", response);
 
 			let data = await response.json();
+			
+			console.log("data", data);
 			document.getElementById("mainList").innerHTML = "";
+			
+			console.log("liste data", data);
 
 			for (let i = 0; i < data.length; i++) {
 
@@ -429,7 +435,7 @@ async function DeletePost() {
 	}
 
 	AddList();
-	//CreateUser();
+	CreateUser();
 	//authenticateUser();
 	//fetchQuote();
 
