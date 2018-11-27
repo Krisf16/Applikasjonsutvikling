@@ -1,123 +1,438 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-  <meta charset="utf-8" />
-  <title>To-do</title>
-    <link rel="stylesheet" href="Idunno.css">
+	<meta charset="utf-8" />
+	<title>To-do</title>
+	<link rel="stylesheet" href="Idunno.css">
 </head>
 
 <body>
-    
-    <span onclick="document.getElementById('Login_Modal').style.display='block'" class="Btn" id=Login_Btn>Login</span>
-    <span onclick="document.getElementById('Create_Modal').style.display='block'" class="Btn" id=Create_User_Btn>Create User</span>
-    
-    <br>
-    <br>
-    <br>
-    <div id="mainDiv" class="header">
-  <h2>To Do List</h2>
-  <input type="text" id="ListInput" placeholder="Title...">
-  <span class="Btn">Add</span>
-</div>
-    
-    <ul id="mainList"></ul>
 
-<div>
-
-  <div id="Login_Modal" class="modal">
-    <div class="modal-content">
-      
-        <span onclick="document.getElementById('Login_Modal').style.display='none'" 
-        class="ExitBtn">&times;</span>
-          <br>
-        <h2>Login</h2>
-          
-      <div>
-        <p>Username:</p><input type="text" id="Login_Username_Input" placeholder="..." class="modal-input">
-        <p>Password:</p><input type="password" id="Login_Password_Input" placeholder="..." class="modal-input">
-      </div>
-      
-        <p class="modal-foot" >Temp</p>
-        <span onclick="Login()" class="Btn">Login</span>
-      
-        
-    </div>
-  </div>
-</div>
+	<span onclick="document.getElementById('Login_Modal').style.display='block'" class="Btn" id=Login_Btn>Login</span>
+	<span onclick="document.getElementById('Create_Modal').style.display='block'" class="Btn" id=Create_User_Btn>Create User</span>
 
 
-<div>
 
-  <div id="Create_Modal" class="modal">
-    <div class="modal-content2">
-      
-        <span onclick="document.getElementById('Create_Modal').style.display='none'" 
-        class="ExitBtn">&times;</span>
-          <br>
-        <h2>Create User</h2>
-          
-      <div class="container">
-        <p>Email:</p><input type="email" id="email" placeholder="..." class="modal-input">
-        <p>Username:</p><input type="text" id="username" placeholder="..." class="modal-input">
-        <p>Password:</p><input type="password" id="password" placeholder="..." class="modal-input">
-      </div>
-      
-        <p class="modal-foot" >Temp</p>
-        <span id="CreateUserBtn" class="Btn">Login</span>
-      
-        
-    </div>
-  </div>
+	<br>
+	<br>
+	<br>
+	<div id="mainDiv" class="header">
+		<h2>To Do List</h2>
+		<input type="date" id="DateInput" placeholder="Date">
+		<input type="text" id="ListInput" placeholder="To-do">
+		<span class="Btn" id="btn_list" onclick="AddList()">Add</span>
 
-</div>
+
+
+	</div>
+
+	<ul id="mainList"></ul>
+
+	
+<form>
+	<div>
+
+		<div id="Login_Modal" class="modal">
+			<div class="modal-content">
+
+
+
+
+				<span onclick="document.getElementById('Login_Modal').style.display='none'" class="ExitBtn">&times;</span>
+				<br>
+
+				<a> <img src="icon.png" alt="icon" style="width:150px" class="img"> </a>
+
+
+				<h2>Login</h2>
+
+
+				<div>
+					<p>Username:</p><input type="text" id="Login_Username" placeholder="Username" class="modal-input">
+
+					<br />
+
+					<p>Password:</p><input type="password" id="Login_Password" placeholder="Password" class="modal-input">
+				</div>
+
+				<br />
+
+				<p class="modal-foot"></p>
+
+				<br />
+				<span onclick="authenticateUser()" class="Btn">Login</span>
+
+
+			</div>
+		</div>
+	</div>
+</form>
+
+	
+	
+<form>
+	<div>
+
+		<div id="Create_Modal" class="modal">
+			<div class="modal-content2">
+
+				<span onclick="document.getElementById('Create_Modal').style.display='none'" class="ExitBtn">&times;</span>
+				<br>
+
+				<a> <img src="icon.png" alt="icon" style="width:150px" class="img"> </a>
+
+				<h2>Create User</h2>
+
+
+				<div class="container">
+					<p>Email:</p><input type="email" id="Create_email" required="true" placeholder="Email" class="modal-input">
+					<br />
+					<p>Username:</p><input type="text" id="Create_username" required="true" placeholder="Username" class="modal-input">
+					<br />
+					<p>Password:</p><input type="password" required="true" id="Create_password" placeholder="Password" class="modal-input">
+					<br />
+				</div>
+
+				<p class="modal-foot" id="temp"> </p>
+
+				<br />
+				<span id="CreateUserBtn" onclick="CreateUser();" class="Btn">Create User</span>
+
+
+			</div>
+		</div>
+
+	</div>
+</form>
+	
+	
+	<div>
+
+		<div id="Option_Modal" class="modal">
+			<div class="modal-content2">
+
+				<span onclick="document.getElementById('Option_Modal').style.display='none'" class="ExitBtn">&times;</span>
+				<br>
+				<h2>Edit post</h2>
+
+				<div class="container">
+					<p>Edit:</p><input type="text" id="Edit_Post" placeholder="..." class="modal-input">
+					<input type="date" id="DateOption" placeholder="Date">
+
+				</div>
+
+				<p class="modal-foot" id="temp"> </p>
+				<span id="EditPostBtn" class="Btn" onclick="UpdateList()">Send</span>
+
+
+			</div>
+		</div>
+
+	</div>
 
 </body>
-    
+
 <script>
 
-function CreateUser(){
-        
-        let form = document.getElementById("CreateUserBtn");
-        form.onclick = function (evt) {
-            evt.preventDefault();
-            
-            let userName = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let email = document.getElementById("email").value;
-            
-            console.log("Tester knapp");
-            
-            fetch('/app/user', {
-                method:"POST",
-                body:JSON.stringify({
-                    name:username,
-                    password:password,
-                    email:email
-                }),
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-                
-            }).then(function(data){
-                if(data.status < 400){
-                    return data.json();
-                }
-            }).then(function(createdUser){
-                if(createdUser.id){
-                    console.log("Created user forhåpentlighvis")
-                }
-            }).catch(function(error){
-                console.error(error);
-            });
-            
-        }
-    }
+	const DEBUG = true;
+	const authenticationToken = null;
+	const authenticatedUser = null;
+	let userID;
+	let postid;
 
-CreateUser();
-    
+
+
+	function AddList() {
+
+
+		let list = document.getElementById("btn_list");
+
+
+		list.onclick = function(evt) {
+			evt.preventDefault();
+
+			let token = localStorage.getItem("token");
+			
+			let list = document.getElementById("ListInput").value;
+			let date = document.getElementById("DateInput").value;
+
+			if (list === '') {
+				alert("Write Something!");
+			} else {
+
+				let cfg = {
+
+					method: "POST",
+					body: JSON.stringify({
+						desc: list,
+						date: date,
+						userid: userID,
+						active: 1
+
+					}),
+					headers: {
+						"Content-Type": "application/json; charset=utf-8"
+					}
+				}
+				
+				fetch('/app/list?token=' + token, cfg).then(function(response) {
+					if (response.status < 400) {
+						return response.json();
+					} else {
+						return Promise.reject(new Error("Session not valid. logg inn"))
+						alert("Session not valid. logg inn");
+					}
+
+				}).then(function(data) {
+					RefreshList();
+
+				}).catch(function(error) {
+					console.error(error);
+				});
+
+			}
+
+			document.getElementById("ListInput").value = "";
+		}
+
+	};
+
+
+
+	function authenticateUser() {
+
+		let Login_Username = document.getElementById("Login_Username").value;
+		let Login_Password = document.getElementById("Login_Password").value;
+		let credentials = `Basic ${ btoa(Login_Username + ":" + Login_Password)}`;
+
+		let request = {
+			method: "GET",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': credentials
+			}
+		}
+
+		fetch("/app/auth", request).then(function(respons) {
+			if (respons.status < 400) {
+				return respons.json();
+			} else if (respons.status == 401) {
+				return Promise.reject(new Error("Try again"));
+				alert("Try again!");
+			}
+		}).then(function(respons) {
+
+
+			userID = respons.userdata.id;
+			localStorage.setItem("token", respons.token);
+			RefreshList();
+
+		}).catch(function(err) {
+			displayError(err.message);
+		});
+	}
+
+async function RefreshList(userid) {
+
+		let token = localStorage.getItem("token");
+
+		try {
+
+			let response = await fetch('/app/list?token=' + token + "&userid=" + userID, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json; charset=utf-8"
+				}
+
+			});
+
+			let data = await response.json();
+			document.getElementById("mainList").innerHTML = "";
+
+			for (let i = 0; i < data.length; i++) {
+
+				let list = data[i].descr;
+				let dt = data[i].date;
+				let date = new Date(dt);
+
+				let li = document.createElement("li");
+				let t = document.createTextNode(list);
+				let d = document.createTextNode(date.toDateString());
+				let m = document.createTextNode(" ");
+
+				li.appendChild(d);
+				li.appendChild(m);
+				li.appendChild(t);
+				document.getElementById("mainList").appendChild(li);
+				
+				console.log(data[i]);
+
+				let span = document.createElement("SPAN");
+				let txt = document.createTextNode("\u00D7");
+				span.className = "close";
+				span.appendChild(txt);
+				li.appendChild(span);
+
+				let span2 = document.createElement("SPAN");
+				let txt2 = document.createTextNode("=");
+				
+				span2.id = data[i].id;
+				
+				span2.className = "option";
+				span2.appendChild(txt2);
+				li.appendChild(span2);
+
+				let close = document.getElementsByClassName("close");
+				let b;
+				for (b = 0; b < close.length; b++) {
+					close[b].onclick = function() {
+						let div = this.parentElement;
+						div.style.display = "none";
+						DeletePost();
+					}
+				}
+
+				let option = document.getElementsByClassName("option");
+				let f;
+				for (f = 0; f < option.length; f++) {
+					option[f].onclick = function(evt) {
+						document.getElementById('Option_Modal').style.display = 'block';
+						console.log(evt.currentTarget.id);
+						postid = evt.currentTarget.id;
+					}
+				}
+			}
+			
+			
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+//slett post
+/*
+async function DeletePost() {
+
+		let token = localStorage.getItem("token");
+
+		let update = {
+
+					method: "POST",
+					body: JSON.stringify({
+						postId: postid,
+						
+					}),
+					headers: {
+						"Content-Type": "application/json; charset=utf-8"
+					}
+				}
+		
+			fetch('/app/post/delete?token=' + token, update).then(function(response) {
+					if (response.status > 200) {
+						return response.json();
+					} else {
+						return Promise.reject(new Error("Something went wrong deleting post"))
+					}
+
+				}).then(function(data) {
+					RefreshList();
+
+				}).catch(function(error) {
+					console.error(error);
+				});
+		
+		
+		
+		
+	};
+*/
+//update list
+/*async function UpdateList(postid) {
+
+		let token = localStorage.getItem("token");
+
+		let list = document.getElementById("Edit_Post").value;
+		let date = document.getElementById("DateOption").value;
+
+		let update = {
+
+					method: "POST",
+					body: JSON.stringify({
+						desc: list,
+						date: date,
+						id: postid
+						
+					}),
+					headers: {
+						"Content-Type": "application/json; charset=utf-8"
+					}
+				}
+		
+			fetch('/app/list?token=' + token, update).then(function(response) {
+					if (response.status < 400) {
+						return response.json();
+					} else {
+						return Promise.reject(new Error("Noe gikk galt under oppdatering av list objekt"))
+					}
+
+				}).then(function(data) {
+					RefreshList();
+
+				}).catch(function(error) {
+					console.error(error);
+				});
+
+	};
+
+*/
+	
+	function CreateUser() {
+
+		let form = document.getElementById("CreateUserBtn");
+		form.onclick = function(evt) {
+			evt.preventDefault();
+
+			let username = document.getElementById("Create_username").value;
+			let password = document.getElementById("Create_password").value;
+			let email = document.getElementById("Create_email").value;
+			let role = 42;
+
+			console.log("Tester knapp");
+
+			fetch('/app/user', {
+				method: "POST",
+				body: JSON.stringify({
+					name: username,
+					password: password,
+					email: email
+				}),
+				headers: {
+					"Content-Type": "application/json; charset=utf-8"
+				},
+
+			}).then(function(response) {
+				if (response.status < 400) {
+					return response.json();
+				}
+			}).then(function(data) {
+
+				console.log(data.msg)
+
+			}).catch(function(error) {
+				console.error(error);
+			});
+
+		}
+	}
+
+	AddList();
+	CreateUser();
+	//authenticateUser();
+	//fetchQuote();
+
 </script>
-    
+
 </html>
-
-

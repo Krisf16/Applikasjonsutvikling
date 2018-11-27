@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "pg": "^7.5.0"
   },
   "devDependencies": {},
@@ -15,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/libank11/To-do-list.git"
+    "url": "git+https://github.com/krisf16/Applikasjonustvikling.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/libank11/To-do-list/issues"
+    "url": "https://github.com/krisf16/Applikasjonsutvikling/issues"
   },
-  "homepage": "https://github.com/libank11/To-do-list#readme"
+  "homepage": "https://github.com/krisf16/Applikasjonsutvikling#readme"
 }
