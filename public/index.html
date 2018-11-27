@@ -231,7 +231,7 @@
 			RefreshList();
 
 		}).catch(function(err) {
-			displayError(err.message);
+			console.log(err.message);
 		});
 	}
 
@@ -291,7 +291,7 @@ async function RefreshList(userid) {
 					close[b].onclick = function() {
 						let div = this.parentElement;
 						div.style.display = "none";
-						DeletePost();
+						//DeletePost();
 					}
 				}
 
@@ -429,7 +429,7 @@ async function DeletePost() {
 	}
 
 	AddList();
-	CreateUser();
+	//CreateUser();
 	//authenticateUser();
 	//fetchQuote();
 
