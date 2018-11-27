@@ -28,7 +28,7 @@ async function runQuery(query) {
         });
 
         respons = res;
-		client.close();
+		//client.close();
       
     } catch (e) {
         console.log("Error");
