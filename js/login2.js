@@ -5,7 +5,7 @@ const user = {};
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.SUPER_FISHER || "ikke veldig sikkert";
+const secret = process.env.SUPER_FISHER;
 
 router.get("/app/auth", async function (request, respons, next) {
 
